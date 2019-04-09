@@ -1,0 +1,72 @@
+package lab_02;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
+public class toLarge implements Runnable {
+
+	public static void launch() {
+		toLarge large = new toLarge();
+		Thread thread_large = new Thread(large);
+		thread_large.start();
+	}
+
+	int port = 2239;
+	String host = "127.0.0.1";
+	ServerSocket s1;
+	Socket ss;
+	PrintWriter out;
+	BufferedReader in;
+
+	void setInput(int port) {
+		this.port = port;
+	}
+
+	void setOutput(String host, int port) {
+		this.host = host;
+		this.port = port;
+	}
+
+	void start() throws UnknownHostException, IOException {
+		s1 = new ServerSocket(port);
+		ss = s1.accept();
+		out = new PrintWriter(ss.getOutputStream(), true);
+		in = new BufferedReader(new InputStreamReader(ss.getInputStream()));
+		String text_in;
+		text_in = in.readLine();
+		// konwersja tekstu
+		String converted_text = text_in.toUpperCase();
+		// odeslanie przekonwertowanego tekstu do klienta
+		out.println(converted_text);
+	}
+
+	void stop() throws IOException {
+		s1.close();
+		ss.close();
+		out.close();
+		in.close();
+	}
+
+	@Override
+	public void run() {
+		try {
+			start();
+			stop();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+}
