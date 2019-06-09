@@ -1,0 +1,3 @@
+To jest plik testowy!
+Je¿eli mo¿esz to odczytaæ...
+To dobra robota!!!

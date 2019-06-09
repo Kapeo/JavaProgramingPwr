@@ -1,0 +1,11 @@
+/* AUTOMATICALLY GENERATED ON Mon May 13 12:14:55 CEST 2019*/
+/* DO NOT EDIT */
+
+keystore "file:/C:/Users/LENOVO/eclipse-workspace/lab_09/kszymulakeys.jks", "JKS", "SUN";
+keystorePasswordURL "file:/C:/Users/LENOVO/eclipse-workspace/lab_09/keystore.pass";
+
+grant signedBy "kszymula", codeBase "file:../scryptography.jar" {
+  permission java.security.AllPermission;
+  permission java.io.FilePermission "<<ALL FILES>>", "read, write, delete, execute";
+};
+
